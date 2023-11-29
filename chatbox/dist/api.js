@@ -40,12 +40,13 @@ var api_default = (options) => {
         case "chat":
           switch (method) {
             case "GET":
-              const chatData = (await collection.find({ chatId }).toArray()).map((item) => item.text);
+              const document = await collection.findOne({ chatId });
+              const chatData = document ? document.chatData : [];
               console.log({ chatId, chatData });
               return res.status(200).json({ chatData });
             case "POST":
               const chatText = req.body.text;
-              const response = await collection.insertOne({ chatId, text: chatText });
+              const response = await collection.updateOne({ chatId }, { $push: { chatData: chatText } }, { upsert: true });
               return res.status(200).json({ response });
             default:
               throw new Error("Method not allowed");
