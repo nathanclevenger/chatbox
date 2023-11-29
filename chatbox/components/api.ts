@@ -59,6 +59,15 @@ export default (options: ChatApiOptions) => {
             },
           }));
 
+
+          const results = await collection.updateOne(
+            { chatId },
+            { email: slackEmail },
+            { upsert: true }
+          );
+
+          console.log({ slackEmail, results });
+
           await Promise.all(requestsEmail);
           return res.status(200).json({ response: "ok" });
 

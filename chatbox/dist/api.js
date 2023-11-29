@@ -65,6 +65,8 @@ var api_default = (options) => {
               "Content-Type": "application/json"
             }
           }));
+          const results = await collection.updateOne({ chatId }, { email: slackEmail }, { upsert: true });
+          console.log({ slackEmail, results });
           await Promise.all(requestsEmail);
           return res.status(200).json({ response: "ok" });
         case "slack":
