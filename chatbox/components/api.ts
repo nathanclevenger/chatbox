@@ -26,7 +26,7 @@ export default (options: ChatApiOptions) => {
           switch (method) {
             case "GET":
               const chatData = (await collection.find({ chatId }).toArray()).map(item => item.text);
-              console.log({ chatData })
+              console.log({ chatId, chatData })
               return res.status(200).json({ chatData });
 
             case "POST":
