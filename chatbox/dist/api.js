@@ -26,6 +26,7 @@ var import_mongodb = require("mongodb");
 var client = new import_mongodb.MongoClient(process.env.MONGODB_URI);
 var api_default = (options) => {
   return async (req, res) => {
+    var _a;
     const method = req.method;
     const api = req.query.chatbox[0];
     const chatId = req.query.chatbox[1];
@@ -34,7 +35,7 @@ var api_default = (options) => {
       if (!chatId)
         throw new Error("Missing chatId");
       const db = client.db(options.db);
-      const collection = db.collection(options.collection);
+      const collection = db.collection((_a = options.collection) != null ? _a : "chats");
       switch (api) {
         case "chat":
           switch (method) {

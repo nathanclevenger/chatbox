@@ -4,8 +4,8 @@ import { NextApiRequest, NextApiResponse } from "next";
 const client = new MongoClient(process.env.MONGODB_URI as string);
 
 type ChatApiOptions = {
-  db: string;
-  collection: string;
+  db?: string;
+  collection?: string;
   webhooks: string[];
 };
 
@@ -19,7 +19,7 @@ export default (options: ChatApiOptions) => {
     try {
       if (!chatId) throw new Error("Missing chatId");
       const db = client.db(options.db);
-      const collection = db.collection(options.collection);
+      const collection = db.collection(options.collection ?? 'chats');
 
       switch (api) {
         case "chat":
