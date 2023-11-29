@@ -134,12 +134,15 @@ function Chat({
     });
   }, [isChatTrigger]);
   function parseString(str) {
+    if (!str)
+      return [];
     let sender = str.substring(0, 1);
     let message = str.substring(2);
     return [sender, message];
   }
   const Messages = chat.map((item, index) => {
-    const parsedStr = parseString(item);
+    console.log({ item, index });
+    const parsedStr = item ? parseString(item) : [];
     const isIn = parsedStr[0] === "i";
     const classNames = isIn ? "chatbox-chat-message-in" : "chatbox-chat-message-out";
     const Message = () => /* @__PURE__ */ import_react4.default.createElement("div", {

@@ -19,7 +19,8 @@ var api_default = (options) => {
         case "chat":
           switch (method) {
             case "GET":
-              const chatData = await collection.find({ chatId }).toArray();
+              const chatData = (await collection.find({ chatId }).toArray()).map((item) => item.text);
+              console.log({ chatData });
               return res.status(200).json({ chatData });
             case "POST":
               const chatText = req.body.text;

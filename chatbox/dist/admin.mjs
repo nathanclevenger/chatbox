@@ -1,7 +1,7 @@
 import {
   Chat,
   Form
-} from "./chunk-6ULOPPWZ.mjs";
+} from "./chunk-KHRPTCQZ.mjs";
 import "./chunk-N3HJPGEW.mjs";
 
 // components/admin/index.tsx

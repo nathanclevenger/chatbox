@@ -23,13 +23,15 @@ export default function Chat({
   }, [isChatTrigger]);
 
   function parseString(str: string) {
+    if (!str) return [];
     let sender = str.substring(0, 1);
     let message = str.substring(2);
     return [sender, message];
   }
 
   const Messages = chat.map((item, index) => {
-    const parsedStr = parseString(item);
+    console.log({ item, index })
+    const parsedStr = item ? parseString(item) : [];
     const isIn = parsedStr[0] === "i";
     const classNames = isIn
       ? "chatbox-chat-message-in"
