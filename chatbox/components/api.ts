@@ -62,7 +62,7 @@ export default (options: ChatApiOptions) => {
 
           const results = await collection.updateOne(
             { chatId },
-            { email: slackEmail },
+            { $set: { email: slackEmail }},
             { upsert: true }
           );
 
